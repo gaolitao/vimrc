@@ -898,7 +898,7 @@ let g:syntastic_go_checkers = ['golint', 'govet']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 " Enable lsp for go by using gopls
-let g:go_def_mode='gopls'
+"let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
 let g:go_highlight_types = 1
@@ -952,8 +952,24 @@ augroup go
 augroup END
 
 
-  let g:completor_filetype_map = {}
-  let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}
+let g:completor_filetype_map = {}
+let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gm <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
 "easymotion
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
