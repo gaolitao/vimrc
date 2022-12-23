@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/wruser/works/wrcp/issues/ALL_NODES_20220920.051042/controller-1_20220920.051042/var/log/puppet'
+let g:netrw_dirhist_2='/home/wruser/works/wrcp/stx-dev/docs'
+let g:netrw_dirhist_3='/home/wruser/works/k8s/kube-proxy'
+let g:netrw_dirhist_4='/home/wruser/works/k8s/kubernetes'

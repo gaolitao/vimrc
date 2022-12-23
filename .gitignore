@@ -1,2 +1,4 @@
 # ignore ALL files in view
 vim/view/
+vim/**/.git2/
+
