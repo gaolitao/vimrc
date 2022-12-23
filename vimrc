@@ -13,7 +13,7 @@
 	" Basics {
 		set nocompatible 		" must be first line
 		"set background=dark     " Assume a dark background
-        "set guifont=Consolas:h11:cANSI
+        set guifont=Consolas:h13:cANSI
 	" }
 
 	" Windows Compatible {
@@ -82,6 +82,7 @@
 		set backup 						" backups are nice ...
         " Moved to function at bottom of the file
 		"set backupdir=$HOME/.vimbackup//  " but not when they clog .
+		set backupdir=/tmp/
 		"set directory=$HOME/.vimswap// 	" Same for swap files
 		"set viewdir=$HOME/.vimviews// 	" same for view files
 		
@@ -171,7 +172,7 @@
         %s/\s\+$//ge
         exe "normal `z"
     endfunc
-    autocmd BufWrite *.py :call DeleteTrailingWS()
+    "autocmd BufWrite *.py :call DeleteTrailingWS()
 
     " 第80列往后加下划线
     au BufWinEnter * let w:m2=matchadd('Underlined', '\%>' . 80 . 'v.\+', -1)
@@ -218,29 +219,6 @@
 
 " }
 
-
-" Motion {
-    let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-    " Jump to anywhere you want with minimal keystrokes, with just one key binding.
-    " `s{char}{label}`
-    nmap s <Plug>(easymotion-overwin-f)
-    " or
-    " `s{char}{char}{label}`
-    " Need one more keystroke, but on average, it may be more comfortable.
-    " nmap s <Plug>(easymotion-overwin-f2)
-    nmap <Space> <Plug>(easymotion-overwin-f2)
-
-    " Turn on case-insensitive feature
-    let g:EasyMotion_smartcase = 1
-
-    " HJKL motions: Line motions
-    map <Leader>h <Plug>(easymotion-linebackward)
-    map <Leader>j <Plug>(easymotion-j)
-    map <Leader>k <Plug>(easymotion-k)
-    map <Leader>l <Plug>(easymotion-lineforward)
-" }
-
 " Key (re)Mappings {
 
 	"The default leader is '\', but many people prefer ',' as it's in a standard
@@ -259,11 +237,11 @@
 
     " Fast editing of the .vimrc
 	if has('win32') || has('win64')
-	    map <leader>e :e! $VIM/_vimrc<cr>
+	    map <leader>e :e $VIM/_vimrc<cr>
 		" When vimrc is edited, reload it
         autocmd! bufwritepost _vimrc source $VIM/_vimrc
     else 
-	    map <leader>e :e! ~/.vimrc<cr>
+	    map <leader>e :e ~/.vimrc<cr>
 		" When vimrc is edited, reload it
         autocmd! bufwritepost vimrc source ~/.vimrc
 	endif
@@ -555,7 +533,7 @@
    "
    " Neocomplcache {
    "
-       
+       let g:neocomplete#enable_at_startup = 1
        "let g:neocomplcache_disable_auto_complete = 1
        "let g:neocomplcache_enable_auto_select = 1
 
@@ -693,13 +671,13 @@
         " }
 
         " VCS commands {
-			nmap <leader>vs :VCSStatus<CR>
-			nmap <leader>vc :VCSCommit<CR>
-			nmap <leader>vb :VCSBlame<CR>
-			nmap <leader>va :VCSAdd<CR>
-			nmap <leader>vd :VCSVimDiff<CR>
-			nmap <leader>vl :VCSLog<CR>
-			nmap <leader>vu :VCSUpdate<CR>
+            "nmap <leader>vs :VCSStatus<CR>
+            "nmap <leader>vc :VCSCommit<CR>
+            "nmap <leader>vb :VCSBlame<CR>
+            "nmap <leader>va :VCSAdd<CR>
+            "nmap <leader>vd :VCSVimDiff<CR>
+            "nmap <leader>vl :VCSLog<CR>
+            "nmap <leader>vu :VCSUpdate<CR>
 		" }
 		
 		" php-doc commands {
@@ -711,7 +689,7 @@
 			map <F11> :DbgStepInto<CR>
 			map <F10> :DbgStepOver<CR>
 			map <S-F11> :DbgStepOut<CR>
-			map <F5> :DbgRun<CR>
+			"map <F5> :DbgRun<CR>
 			map <F6> :DbgDetach<CR>
 			"map <F8> :DbgToggleBreakpoint<CR>
 			map <S-F8> :DbgFlushBreakpoints<CR>
@@ -738,8 +716,8 @@
          " Cscope {
          "     "设定是否使用quickfix窗口显示cscope结果  
                "set cscopequickfix=s-,c-,d-,i-,t-,e-,f- 
-               nmap <leader><leader>k :cscope kill 0<cr>
-               nmap <leader><leader>a :cscope add cscope.out<cr>
+               "nmap <leader><leader>k :cscope kill 0<cr>
+               "nmap <leader><leader>a :c""scope add cscope.out<cr>
 
          " }
          "
@@ -772,7 +750,7 @@
         " some customization for Rope
         "
     "}
-
+    
     " CtrlP {
         let g:ctrlp_max_files = 30000
         let g:ctrlp_match_window = ''
@@ -782,7 +760,8 @@
     " Python-mode {
         "let g:pymode_rope_completion_bind = '<S-Space>'
         "let g:pymode_rope_completion_bind = "<c-x><c-o>"
-        let g:pymode_rope_goto_definition_cmd = 'vnew'
+        "let g:pymode_rope_goto_definition_cmd = 'vnew'   "vertical new window
+        let g:pymode_rope_goto_definition_cmd = 'tabnew'   "vertical new window
         let g:pymode_breakpoint_cmd = ''
     " }
 
@@ -790,6 +769,20 @@
         "require vim compiled with flag --with-features=big, not enabled now
         "let g:Powerline_symbols = 'fancy'
     " }
+
+    " Make and build code
+        map <F5> :make<CR>
+    " }
+    "
+    " For :only
+    map <leader>vc :only<CR>
+    
+    let g:EasyGrepExtraWarnings=0
+    let g:EasyGrepCommand=1
+    let g:EasyGrepRecursive=1
+    let g:EasyGrepMode=2
+
+
 " }
 
 " GUI Settings {
@@ -878,3 +871,112 @@ endfunction
     set nospell
     nnoremap <Leader><Leader>c :colorscheme default<CR>
 "}
+"
+"
+"
+"go
+
+" go
+let g:go_version_warning = 0
+let g:go_debug=['lsp']
+
+" vim-go
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+let g:go_list_type = "quickfix"
+let g:go_fmt_command = "goimports"
+let g:go_fmt_fail_silently = 1
+let g:syntastic_go_checkers = ['golint', 'govet']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+
+" Enable lsp for go by using gopls
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_extra_types = 1
+
+"autocmd FileType go setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+"autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+
+augroup completion_preview_close
+  autocmd!
+  if v:version > 703 || v:version == 703 && has('patch598')
+    autocmd CompleteDone * if !&previewwindow && &completeopt =~ 'preview' | silent! pclose | endif
+  endif
+augroup END
+
+augroup go
+
+  au!
+  au Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+  au Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+  au Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+  au Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe')
+
+  au FileType go nmap <Leader>dd <Plug>(go-def-vertical)
+  au FileType go nmap <Leader>dv <Plug>(go-doc-vertical)
+  au FileType go nmap <Leader>db <Plug>(go-doc-browser)
+
+  au FileType go nmap <leader>r  <Plug>(go-run)
+  au FileType go nmap <leader>t  <Plug>(go-test)
+  au FileType go nmap <Leader>gt <Plug>(go-coverage-toggle)
+  au FileType go nmap <Leader>i <Plug>(go-info)
+  au FileType go nmap <silent> <Leader>l <Plug>(go-metalinter)
+  au FileType go nmap <C-g> :GoDecls<cr>
+  au FileType go nmap <leader>dr :GoDeclsDir<cr>
+  au FileType go imap <C-g> <esc>:<C-u>GoDecls<cr>
+  au FileType go imap <leader>dr <esc>:<C-u>GoDeclsDir<cr>
+  au FileType go nmap <leader>rb :<C-u>call <SID>build_go_files()<CR>
+  "au FileType go inoremap <buffer> . .<C-x><C-o>
+
+augroup END
+
+
+  let g:completor_filetype_map = {}
+  let g:completor_filetype_map.go = {'ft': 'lsp', 'cmd': 'gopls -remote=auto'}
+
+"easymotion
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-overwin-f)
+nmap <Space> <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case-insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>l <Plug>(easymotion-lineforward)
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+map <Leader>h <Plug>(easymotion-linebackward)
+
+" line Indent
+let g:indentLine_conceallevel = 3
+
+
