@@ -6,7 +6,7 @@ let g:powerline_loaded = 1
 if exists('g:powerline_pycmd')
 	let s:pycmd = substitute(g:powerline_pycmd, '\v\C^(py)%[thon](3?)$', '\1\2', '')
 	if s:pycmd is# 'py'
-		let s:has_python = has('python')
+		let s:has_python = has('python3')
 		let s:pyeval = get(g:, 'powerline_pyeval', 'pyeval')
 	elseif s:pycmd is# 'py3'
 		let s:has_python = has('python3')
@@ -25,7 +25,7 @@ if exists('g:powerline_pycmd')
 		let s:pyeval = g:powerline_pyeval
 		let s:has_python = 1
 	endif
-elseif has('python')
+elseif has('python3')
 	let s:has_python = 1
 	let s:pycmd = 'py'
 	let s:pyeval = get(g:, 'powerline_pyeval', 'pyeval')

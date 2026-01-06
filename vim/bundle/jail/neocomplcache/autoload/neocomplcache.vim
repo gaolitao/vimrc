@@ -286,7 +286,7 @@ function! neocomplcache#enable() "{{{
         \ {'filetype' : 'ruby', 'start' : '<%[=#]\?', 'end' : '%>'},
         \])
   call neocomplcache#set_dictionary_helper(g:neocomplcache_filetype_include_lists, 'vim', [
-        \ {'filetype' : 'python', 'start' : '^\s*python <<\s*\(\h\w*\)', 'end' : '^\1'},
+        \ {'filetype' : 'python', 'start' : '^\s*python3 <<\s*\(\h\w*\)', 'end' : '^\1'},
         \ {'filetype' : 'ruby', 'start' : '^\s*ruby <<\s*\(\h\w*\)', 'end' : '^\1'},
         \])
   call neocomplcache#set_dictionary_helper(g:neocomplcache_filetype_include_lists, 'html,xhtml', [

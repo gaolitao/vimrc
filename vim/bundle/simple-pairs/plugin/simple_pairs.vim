@@ -1,9 +1,9 @@
-if !has('python')
+if !has('python3')
     s:ErrMsg( "Error: Required vim compiled with +python" )
     finish
 endif
 
-python << endpython
+python3 << endpython
 import vim
 pairs = {'(': ')', '[': ']', '{': '}', '"': '"', "'": "'"}
 def getNextChar():
@@ -30,7 +30,7 @@ def isEmptyPair():
 
 endpython
 function! s:InsertPair(c)
-python << endpython
+python3 << endpython
 
 c = vim.eval("a:c")
 matchingPair = pairs[c]
@@ -56,7 +56,7 @@ endpython
 endfunction
 
 function! s:ClosePair(c)
-python << endpython
+python3 << endpython
 
 c = vim.eval("a:c")
 stepOver = getNextChar() == c 
@@ -73,7 +73,7 @@ return l:result
 endfunction
 
 function! s:Backspace()
-python << endpython
+python3 << endpython
 vim.command("let l:inside = %d" % (isEmptyPair() and 1 or 0))
 endpython
 
@@ -83,7 +83,7 @@ endif
 return "\<BS>"
 endfunction
 
-python << endpython
+python3 << endpython
 for open, close in pairs.items():
     vim.command("inoremap <silent> %s <C-R>=<SID>ClosePair(%r)<CR>" % (close, close))
     vim.command("inoremap <silent> %s <C-R>=<SID>InsertPair(%r)<CR>" % (open, open))

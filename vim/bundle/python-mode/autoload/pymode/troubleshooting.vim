@@ -25,12 +25,12 @@ fun! pymode#troubleshooting#test() "{{{
         call append('$', ['WARNING: ', 'Python-mode required :filetype plugin indent on', ''])
     endif
 
-    call append('$', ['+python: ' . has('python')])
+    call append('$', ['+python: ' . has('python3')])
     call append('$', ['+python3: ' . has('python3'), ''])
 
     if g:pymode_python == 'disable'
 
-        if !has('python') && !has('python3')
+        if !has('python3') && !has('python3')
 
             call append('$', ['WARNING: Python-mode required vim compiled with +python or +python3.',
                             \ '"lint, rope, run, doc, virtualenv" features disabled.', ''])

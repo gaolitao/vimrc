@@ -1,4 +1,4 @@
-if !has('python') && !has('python3')
+if !has('python3') && !has('python3')
     finish
 endif
 " ------------------------------------------------------------------------

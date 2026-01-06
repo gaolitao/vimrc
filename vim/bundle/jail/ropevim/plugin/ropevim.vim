@@ -3,7 +3,7 @@ if !has("python")
 endif
 
 function! LoadRope()
-python << EOF
+python3 << EOF
 import ropevim
 from rope_omni import RopeOmniCompleter
 EOF

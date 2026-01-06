@@ -67,7 +67,7 @@ function! s:source.initialize()"{{{
     " call neocomplcache#set_dictionary_helper(g:neocomplcache_omni_patterns, 'ruby',
     "       \'[^. *\t]\.\h\w*\|\h\w*::')
   endif
-  if has('python')
+  if has('python3')
     call neocomplcache#set_dictionary_helper(g:neocomplcache_omni_patterns, 'python',
           \'[^. \t]\.\w*')
   endif

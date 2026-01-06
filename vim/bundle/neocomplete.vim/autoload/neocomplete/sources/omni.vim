@@ -109,7 +109,7 @@ function! s:source.hooks.on_init(context) abort "{{{
           "\'g:neocomplete#sources#omni#input_patterns', 'ruby',
           "\'[^. *\t]\.\h\w*\|\h\w*::\w*')
   endif
-  if has('python') || has('python3')
+  if has('python3') || has('python3')
     call neocomplete#util#set_default_dictionary(
           \'g:neocomplete#sources#omni#input_patterns',
           \'python', '[^. \t]\.\w*')

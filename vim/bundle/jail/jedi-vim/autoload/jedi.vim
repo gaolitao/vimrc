@@ -276,9 +276,9 @@ call s:init()
 
 let s:script_path = fnameescape(expand('<sfile>:p:h:h'))
 
-if has('python') && has('python3')
+if has('python3') && has('python3')
     call jedi#force_py_version(g:jedi#force_py_version)
-elseif has('python')
+elseif has('python3')
     command! -nargs=1 Python python <args>
     execute 'pyfile '.s:script_path.'/initialize.py'
 elseif has('python3')

@@ -570,7 +570,7 @@ function! coc#color#pick_color(default_color)
   endif
 
   let rgb = v:false
-  if !has('python')
+  if !has('python3')
     echohl Error | echom 'python support required, checkout :echo has(''python'')' | echohl None
     return
   endif
@@ -580,7 +580,7 @@ function! coc#color#pick_color(default_color)
     echohl Error | echom 'python gtk module not found' | echohl None
     return
   endtry
-python << endpython
+python3 << endpython
 
 import vim
 import gtk, sys
